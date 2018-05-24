@@ -80,7 +80,7 @@ DS1820::DS1820 (PinName data_pin, PinName power_pin, bool power_polarity) : _dat
     #endif
     
     read_ROM();
-    printf("[ROM] device family 0x%02X\r\n", _ROM[0]);
+    // printf("[ROM] device family 0x%02X\r\n", _ROM[0]);
 
     // if (!unassignedProbe(&_datapin, _ROM))
     //     error("No unassigned DS1820 found!\n");
@@ -362,7 +362,7 @@ int DS1820::convertTemperature(bool wait, devices device) {
 
     // _parasite_power = !read_power_supply();
     _parasite_power = !read_power_supply(DS1820::all_devices);
-    printf("[POWER] using parasite power: %s\r\n", _parasite_power ? "YES" : "NO");
+    // printf("[POWER] using parasite power: %s\r\n", _parasite_power ? "YES" : "NO");
 
     if (device == all_devices)
       skip_ROM(); // Skip ROM command, will convert for ALL devices
@@ -387,13 +387,13 @@ int DS1820::convertTemperature(bool wait, devices device) {
             // _parasitepin = !_power_polarity;
             onewire_reset(&this->_datapin);
             delay_time = 0;
-          printf("[power_mosfet] reverse polarity 750ms\r\n");
+          // printf("[power_mosfet] reverse polarity 750ms\r\n");
         } else {
             _datapin.output();
             _datapin.write(1);
             wait_ms(delay_time);
             _datapin.input();
-          printf("[parasite] pullup wait 750ms\r\n");
+          // printf("[parasite] pullup wait 750ms\r\n");
         }
     } else {
         if (wait) {
